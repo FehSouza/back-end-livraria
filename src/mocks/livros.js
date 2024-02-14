@@ -1,17 +1,17 @@
 export const LIVROS = [
   {
     id: 1,
-    titulo: 'Harry Potter e a Pedra Filosofal',
-    autor: 'J.K. Rowling',
+    title: 'Harry Potter e a Pedra Filosofal',
+    writer: 'J.K. Rowling',
   },
   {
     id: 2,
-    titulo: 'Harry Potter e a Câmera Secreta',
-    autor: 'J.K. Rowling',
+    title: 'Harry Potter e a Câmera Secreta',
+    writer: 'J.K. Rowling',
   },
   {
     id: 3,
-    titulo: 'O Chamado do Cucu',
-    autor: 'Robert Galbraith',
+    title: 'O Chamado do Cucu',
+    writer: 'Robert Galbraith',
   },
 ]
