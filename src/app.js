@@ -48,8 +48,10 @@ app.post('/livros', (req, res) => {
   res.status(201).send('Livro cadastrado com sucesso.')
 })
 
-app.put('/livros/:id', (req, res) => {
-  const book = searchBook(req.params.id)
+// Obs.: utilizado patch ao invés do put para que a atualização seja parcial e se o livro não existir, não será criado
+app.patch('/livros/:id', (req, res) => {
+  const id = req.params.id
+  const book = searchBook(id)
   if (!book) return res.status(404).send('Livro não encontrado.')
 
   const title = req.body.title
@@ -57,12 +59,22 @@ app.put('/livros/:id', (req, res) => {
   if (!title && !writer) return res.status(400).send('Nenhuma alteração realizada.')
 
   const newBooks = BOOKS.map((book) => {
-    if (book.id === Number(req.params.id)) return { ...book, title: title ?? book.title, writer: writer ?? book.writer }
+    if (book.id === Number(id)) return { ...book, title: title ?? book.title, writer: writer ?? book.writer }
     return book
   })
 
   BOOKS = newBooks
   res.status(200).send('Livro atualizado com sucesso.')
+})
+
+app.delete('/livros/:id', (req, res) => {
+  const id = req.params.id
+  const book = searchBook(id)
+  if (!book) return res.status(404).send('Livro não encontrado.')
+
+  const newBooks = BOOKS.filter((book) => book.id !== Number(id))
+  BOOKS = newBooks
+  res.status(200).send('Livro removido com sucesso.')
 })
 
 export default app
